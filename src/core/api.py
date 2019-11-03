@@ -18,6 +18,9 @@ class API(Logger):
         self._request_params.update(params)
 
     def get_request_params(self):
+        for k, v in self._request_params:
+            if k == 'access_token':
+                v = v.decode('base64')
         return self._request_params
 
     def _set_header(self, headers):
