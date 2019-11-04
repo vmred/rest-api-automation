@@ -14,6 +14,11 @@ if int(os.getenv('reqres', '1')) == 1:
 
     extend_suite([TestUsers])
 
+if int(os.getenvb('numbersapi', '1')) == 1:
+    from tests.numbersapi.test_numbersapi import TestNumbersapi
+
+    extend_suite([TestNumbersapi])
+
 
 def run():
     unittest.TextTestRunner(verbosity=2).run(suite)
