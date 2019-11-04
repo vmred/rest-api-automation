@@ -18,9 +18,6 @@ class API(Logger):
         self._request_params.update(params)
 
     def get_request_params(self):
-        for k, v in self._request_params:
-            if k == 'access_token':
-                v = v.decode('base64')
         return self._request_params
 
     def _set_header(self, headers):
@@ -66,7 +63,7 @@ class API(Logger):
 
     def post(self, api, data):
         api_call = self.get_hostname() + api
-        response = requests.post(api_call, data)
+        response = requests.post(api_call, data, params=self.get_request_params())
         self.log('sending POST, url: {}, data: {}'.format(api_call, data))
         self.log('status code: {}'.format(response.status_code))
         response_data = self.format_response_data(response)
